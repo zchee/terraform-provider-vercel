@@ -11,7 +11,8 @@ import (
 func (c *Client) DeleteTeam(ctx context.Context, teamID string) error {
 	url := fmt.Sprintf("%s/v1/teams/%s", c.baseURL, teamID)
 	tflog.Trace(ctx, "deleting team", map[string]interface{}{
-		"url": url,
+		"url":     url,
+		"team_id": teamID,
 	})
 	return c.doRequest(clientRequest{
 		ctx:    ctx,

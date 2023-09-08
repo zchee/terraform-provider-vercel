@@ -13,9 +13,37 @@ type TeamCreateRequest struct {
 	Name string `json:"name"`
 }
 
+type Enabled struct {
+	Value *bool `json:"enabled"`
+}
+
 // TeamResponse is the information returned by the vercel api when a team is created.
 type TeamResponse struct {
-	ID string `json:"id"`
+	ID         string  `json:"id"`
+	Name       *string `json:"name"`
+	Avatar     *string `json:"avatar"`
+	Membership *struct {
+		Role       *string `json:"role"`
+		Confirmed  *bool   `json:"confirmed"`
+		JoinedFrom *struct {
+			Origin *string
+		} `json:"joinedFrom"`
+		UID *string `json:"uid"`
+	} `json:"membership"`
+	EnablePreviewFeedback         *string `json:"enablePreviewFeedback"`
+	IsMigratingToSensitiveEnvVars *bool   `json:"isMigratingToSensitiveEnvVars"`
+	InviteCode                    *string `json:"inviteCode"`
+	Description                   *string `json:"description"`
+	StagingPrefix                 *string `json:"stagingPrefix"`
+	ResourceConfig                *struct {
+		ConcurrentBuilds *int64 `json:"concurrentBuilds"`
+	}
+	RemoteCaching       *Enabled `json:"remoteCaching"`
+	EnabledInvoiceItems *struct {
+		ConcurrentBuilds *Enabled `json:"concurrentBuilds"`
+		Monitoring       *Enabled `json:"monitoring"`
+	} `json:"enabledInvoiceItems"`
+	Spaces *Enabled `json:"spaces"`
 }
 
 // CreateTeam creates a team within vercel.
